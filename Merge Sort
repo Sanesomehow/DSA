@@ -1,0 +1,65 @@
+#include<stdio.h>
+
+int merge(int a[], int b, int mid, int e)
+{
+    int i, j, k;
+    int n1 = mid-b+1;
+    int n2 = e - mid;
+    int left[n1], right[n2];
+    
+    for (int i=0; i<n1; i++)
+    {
+        left[i] = a[b+1];
+    }
+    for(int j=0; j<n2; j++)
+    {
+        right[j] = a[mid+1+j];
+    }
+    i = 0; j = 0; k = b;
+    while(i<=n1 && j<=n2)
+    {
+        if(left[i] < right[j])
+        {
+            a[k] = left[i];
+            i++;
+            k++;
+        }
+    
+        else{
+            a[k] = right[j];
+            j++;
+            k++;
+        }
+    
+    }
+}
+
+void merge_sort(int a[], int b, int e)
+{
+    int mid = (b - e)/2;
+    
+    merge_sort(a, b, mid);
+    
+    merge_sort(a, mid + 1, e);
+    
+    merge(a, b, mid, e);
+    
+}
+
+int main(){
+    int num;
+    printf("Enter the length of the array: ");
+    scanf("%d", &num);
+    int a[num];
+    
+    printf("Enter the elements: ")
+    for(int i=0; i<num; i++)
+    {
+        scanf("\t%d", &a[i]);
+    }
+    
+    merge_sort(a, 0, num-1);
+}
+
+
+
